@@ -1,0 +1,1 @@
+exports.rawToJson = (rawResponse) => eval('(' + rawResponse + ')');

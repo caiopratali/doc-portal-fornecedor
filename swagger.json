@@ -1,0 +1,4772 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Portal do fornecedor",
+        "version": "1.0.0",
+        "description": "API do portal do fornecedor"
+    },
+    "servers": [
+        {
+            "url": "https:/portal-qa.qarti.com.br/Api"
+        }
+    ],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Autenticação da API",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "email": "email@qarti.com.br",
+                                "password": "12344"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Autenticação realizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyRW1haWwiOiJ2aWN0b3IuZmxvcmVzQHFhcnRpLmNvbSIsIkFQSV9USU1FIjoxNzA5NTczODIwfQ.x6eFm4w9oKkBJkMxhkURGftmndWxja-qvhm6ymOjOAk",
+                                    "status": true,
+                                    "response": "Login Success!"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Recessos/adicionar": {
+            "post": {
+                "tags": [
+                    "Recessos"
+                ],
+                "summary": "Adicionar novo recesso",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Descricao": {
+                                        "type": "string"
+                                    },
+                                    "DataInicio": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "DataFinal": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "IdColaborador": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Descricao",
+                                    "DataInicio",
+                                    "DataFinal",
+                                    "IdColaborador"
+                                ]
+                            },
+                            "example": {
+                                "Descricao": "teste qa",
+                                "DataInicio": "2024-03-04",
+                                "DataFinal": "2024-03-04",
+                                "IdColaborador": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Recesso adicionado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Descricao": "teste qa",
+                                    "DataInicio": "2024-03-04",
+                                    "DataFinal": "2024-03-04",
+                                    "IdColaborador": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Recessos/editar/{id}": {
+            "put": {
+                "tags": [
+                    "Recessos"
+                ],
+                "summary": "Atualizar um recesso existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Descricao": {
+                                        "type": "string"
+                                    },
+                                    "DataInicio": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "DataFinal": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "IdColaborador": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Descricao",
+                                    "DataInicio",
+                                    "DataFinal",
+                                    "IdColaborador"
+                                ]
+                            },
+                            "example": {
+                                "Descricao": "teste qa",
+                                "DataInicio": "2024-03-04",
+                                "DataFinal": "2024-03-04",
+                                "IdColaborador": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Recesso atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Descricao": "teste qa",
+                                    "DataInicio": "2024-03-04",
+                                    "DataFinal": "2024-03-04",
+                                    "IdColaborador": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Recessos/meusrecessos": {
+            "get": {
+                "tags": [
+                    "Recessos"
+                ],
+                "summary": "Obter detalhes de todos Recessos cadastrados",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "Descricao": "teste qa",
+                                        "DataInicio": "2024-03-04",
+                                        "DataFinal": "2024-03-04",
+                                        "IdColaborador": 1,
+                                        "Excluido": "0",
+                                        "Ciente": "0",
+                                        "IdUsuarioInclusao": "1",
+                                        "DataInclusao": "2024-03-04 10:54:31",
+                                        "IdUsuarioAlteracao": null,
+                                        "DataAlteracao": null
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Recessos/meusrecessos/{id}": {
+            "get": {
+                "tags": [
+                    "Recessos"
+                ],
+                "summary": "Obter detalhes de um recesso específico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "IdColaborador": "1",
+                                    "Descricao": "TESTE QA",
+                                    "DataInicio": "2024-03-04",
+                                    "DataFinal": "2024-03-05",
+                                    "Ciente": "0",
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null,
+                                    "DataCiente": null,
+                                    "UsuarioCiente": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Recessos/excluir/{id}": {
+            "delete": {
+                "tags": [
+                    "Recessos"
+                ],
+                "summary": "Excluir um recesso existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Departamentos/adicionar": {
+            "post": {
+                "tags": [
+                    "Departamentos"
+                ],
+                "summary": "Adicionar um novo departamento",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Nome": {
+                                        "type": "string"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Nome",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "Nome": "teste qa",
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Departamento adicionado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Nome": "teste qa",
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Departamentos/editar/{id}": {
+            "put": {
+                "tags": [
+                    "Departamentos"
+                ],
+                "summary": "Atualizar um departamento existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Nome": {
+                                        "type": "string"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Nome",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "Nome": "teste qa",
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Departamento atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Nome": "teste qa",
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Departamentos/consultar": {
+            "get": {
+                "tags": [
+                    "Departamentos"
+                ],
+                "summary": "Obter detalhes de todos Departamentos",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "Id": "1",
+                                        "Nome": "teste qa",
+                                        "Ativo": 1,
+                                        "Excluido": "0",
+                                        "IdUsuarioInclusao": "1",
+                                        "DataInclusao": "2024-03-04 10:54:31",
+                                        "IdUsuarioAlteracao": null,
+                                        "DataAlteracao": null
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Departamentos/consultar/{id}": {
+            "get": {
+                "tags": [
+                    "Departamentos"
+                ],
+                "summary": "Obter detalhes de um departamento específico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "Nome": "TESTE QA",
+                                    "Ativo": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Departamentos/excluir/{id}": {
+            "delete": {
+                "tags": [
+                    "Departamentos"
+                ],
+                "summary": "Excluir um departamento existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Feriados/adicionar": {
+            "post": {
+                "tags": [
+                    "Feriados"
+                ],
+                "summary": "Adicionar um novo feriado",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Descricao": {
+                                        "type": "string"
+                                    },
+                                    "Dia": {
+                                        "type": "integer"
+                                    },
+                                    "Mes": {
+                                        "type": "integer"
+                                    },
+                                    "Ano": {
+                                        "type": "integer"
+                                    },
+                                    "IdProjeto": {
+                                        "type": "integer"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Descricao",
+                                    "Dia",
+                                    "Mes",
+                                    "Ano",
+                                    "IdProjeto",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "Descricao": "teste qa",
+                                "Dia": 10,
+                                "Mes": 11,
+                                "Ano": 2024,
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Feriado adicionado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Descricao": "teste qa",
+                                    "Dia": 10,
+                                    "Mes": 11,
+                                    "Ano": 2024,
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Feriados/editar/{id}": {
+            "put": {
+                "tags": [
+                    "Feriados"
+                ],
+                "summary": "Atualizar um feriado existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Descricao": {
+                                        "type": "string"
+                                    },
+                                    "Dia": {
+                                        "type": "integer"
+                                    },
+                                    "Mes": {
+                                        "type": "integer"
+                                    },
+                                    "Ano": {
+                                        "type": "integer"
+                                    },
+                                    "IdProjeto": {
+                                        "type": "integer"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Descricao",
+                                    "Dia",
+                                    "Mes",
+                                    "Ano",
+                                    "IdProjeto",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "Descricao": "teste qa",
+                                "Dia": 10,
+                                "Mes": 11,
+                                "Ano": 2024,
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Feriado atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Descricao": "teste qa",
+                                    "Dia": 10,
+                                    "Mes": 11,
+                                    "Ano": 2024,
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Feriados/consultar": {
+            "get": {
+                "tags": [
+                    "Feriados"
+                ],
+                "summary": "Obter detalhes de todos Feriados",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "Descricao": "teste qa",
+                                        "Dia": 10,
+                                        "Mes": 11,
+                                        "Ano": 2024,
+                                        "Ativo": 1,
+                                        "Excluido": "0",
+                                        "IdUsuarioInclusao": "1",
+                                        "DataInclusao": "2024-03-04 10:54:31",
+                                        "IdUsuarioAlteracao": null,
+                                        "DataAlteracao": null
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Feriados/consultar/{id}": {
+            "get": {
+                "tags": [
+                    "Feriados"
+                ],
+                "summary": "Obter detalhes de um feriado específico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "IdColaborador": "1",
+                                    "Nome": "TESTE QA",
+                                    "Ativo": "2024-03-04",
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Feriados/excluir/{id}": {
+            "delete": {
+                "tags": [
+                    "Feriados"
+                ],
+                "summary": "Excluir um feriado existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Ferias/adicionar": {
+            "post": {
+                "tags": [
+                    "Ferias"
+                ],
+                "summary": "Adicionar uma nova data para Ferias",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Descricao": {
+                                        "type": "string"
+                                    },
+                                    "DataInicio": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "DataFinal": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "IdColaborador": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Descricao",
+                                    "DataInicio",
+                                    "DataFinal",
+                                    "IdColaborador"
+                                ]
+                            },
+                            "example": {
+                                "Descricao": "teste qa",
+                                "DataInicio": "2024-03-04",
+                                "DataFinal": "2024-03-04",
+                                "IdColaborador": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ferias adicionada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Descricao": "teste qa",
+                                    "DataInicio": "2024-03-04",
+                                    "DataFinal": "2024-03-04",
+                                    "IdColaborador": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Ferias/editar/{id}": {
+            "put": {
+                "tags": [
+                    "Ferias"
+                ],
+                "summary": "Atualizar uma Ferias existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Descricao": {
+                                        "type": "string"
+                                    },
+                                    "DataInicio": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "DataFinal": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "IdColaborador": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Descricao",
+                                    "DataInicio",
+                                    "DataFinal",
+                                    "IdColaborador"
+                                ]
+                            },
+                            "example": {
+                                "Descricao": "teste qa",
+                                "DataInicio": "2024-03-04",
+                                "DataFinal": "2024-03-04",
+                                "IdColaborador": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ferias atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Descricao": "teste qa",
+                                    "DataInicio": "2024-03-04",
+                                    "DataFinal": "2024-03-04",
+                                    "IdColaborador": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Ferias/consultar": {
+            "get": {
+                "tags": [
+                    "Ferias"
+                ],
+                "summary": "Obter detalhes de todos as Ferias cadastrada",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "Descricao": "teste qa",
+                                    "DataInicio": "2024-03-04",
+                                    "DataFinal": "2024-03-04",
+                                    "IdColaborador": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Ferias/consultar/{id}": {
+            "get": {
+                "tags": [
+                    "Ferias"
+                ],
+                "summary": "Obter detalhes de uma feria específica",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "Descricao": "teste qa",
+                                    "DataInicio": "2024-03-04",
+                                    "DataFinal": "2024-03-04",
+                                    "IdColaborador": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Ferias/excluir/{id}": {
+            "delete": {
+                "tags": [
+                    "Ferias"
+                ],
+                "summary": "Excluir uma data existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Lancamentos/adicionar": {
+            "post": {
+                "tags": [
+                    "Lancamentos"
+                ],
+                "summary": "Adicionar um lançamento de horas",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "IdAtividade": {
+                                        "type": "integer"
+                                    },
+                                    "IdColaborador": {
+                                        "type": "integer"
+                                    },
+                                    "IdCliente": {
+                                        "type": "integer"
+                                    },
+                                    "IdProjeto": {
+                                        "type": "integer"
+                                    },
+                                    "DataInicio": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "DataFim": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    },
+                                    "Observacao": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "IdAtividade",
+                                    "IdColaborador",
+                                    "IdCliente",
+                                    "IdProjeto",
+                                    "DataInicio",
+                                    "DataFim",
+                                    "Ativo",
+                                    "Observacao"
+                                ]
+                            },
+                            "example": {
+                                "IdAtividade": "1",
+                                "IdColaborador": "1",
+                                "IdCliente": "1",
+                                "IdProjeto": "1",
+                                "DataInicio": "2024-03-04",
+                                "DataFim": "2024-03-04",
+                                "Ativo": "1",
+                                "Observacao": "teste qa"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Lançamento adicionada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "IdAtividade": "1",
+                                    "IdColaborador": "1",
+                                    "IdCliente": "1",
+                                    "IdProjeto": "1",
+                                    "DataInicio": "2024-03-04",
+                                    "DataFim": "2024-03-04",
+                                    "Ativo": "1",
+                                    "Observacao": "teste qa"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Lancamentos/editar/{id}": {
+            "put": {
+                "tags": [
+                    "Lancamentos"
+                ],
+                "summary": "Atualizar um lançamento existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "IdAtividade": {
+                                        "type": "integer"
+                                    },
+                                    "IdColaborador": {
+                                        "type": "integer"
+                                    },
+                                    "IdCliente": {
+                                        "type": "integer"
+                                    },
+                                    "IdProjeto": {
+                                        "type": "integer"
+                                    },
+                                    "DataInicio": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "DataFim": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    },
+                                    "Observacao": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "IdAtividade",
+                                    "IdColaborador",
+                                    "IdCliente",
+                                    "IdProjeto",
+                                    "DataInicio",
+                                    "DataFim",
+                                    "Ativo",
+                                    "Observacao"
+                                ]
+                            },
+                            "example": {
+                                "IdAtividade": "1",
+                                "IdColaborador": "1",
+                                "IdCliente": "1",
+                                "IdProjeto": "1",
+                                "DataInicio": "2024-03-04",
+                                "DataFim": "2024-03-04",
+                                "Ativo": "1",
+                                "Observacao": "teste qa"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Lançamento atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "IdAtividade": "1",
+                                    "IdColaborador": "1",
+                                    "IdCliente": "1",
+                                    "IdProjeto": "1",
+                                    "DataInicio": "2024-03-04",
+                                    "DataFim": "2024-03-04",
+                                    "Ativo": "1",
+                                    "Observacao": "teste qa"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Lancamentos/consultar": {
+            "get": {
+                "tags": [
+                    "Lancamentos"
+                ],
+                "summary": "Obter detalhes de todos os lançamentos cadastrado",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "IdAtividade": "1",
+                                    "IdColaborador": "1",
+                                    "IdCliente": "1",
+                                    "IdProjeto": "1",
+                                    "DataInicio": "2024-03-04",
+                                    "DataFim": "2024-03-04",
+                                    "Ativo": "1",
+                                    "Observacao": "teste qa",
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Lancamentos/consultar/{id}": {
+            "get": {
+                "tags": [
+                    "Lancamentos"
+                ],
+                "summary": "Obter detalhes de um lançamento específico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "IdAtividade": "1",
+                                    "IdColaborador": "1",
+                                    "IdCliente": "1",
+                                    "IdProjeto": "1",
+                                    "DataInicio": "2024-03-04",
+                                    "DataFim": "2024-03-04",
+                                    "Ativo": "1",
+                                    "Observacao": "teste qa",
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Lancamentos/excluir/{id}": {
+            "delete": {
+                "tags": [
+                    "Lancamentos"
+                ],
+                "summary": "Excluir um lançamento",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ProjetosTipos/adicionar": {
+            "post": {
+                "tags": [
+                    "ProjetosTipos"
+                ],
+                "summary": "Adicionar um novo tipo de projeto",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Descricao": {
+                                        "type": "string"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Nome",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "Descricao": "teste qa",
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tipo de projeto adicionado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Descricao": "teste qa",
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ProjetosTipos/editar/{id}": {
+            "put": {
+                "tags": [
+                    "ProjetosTipos"
+                ],
+                "summary": "Atualizar um tipo de projeto existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Descricao": {
+                                        "type": "string"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Nome",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "Descricao": "teste qa",
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tipo de projeto atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Descricao": "teste qa",
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ProjetosTipos/consultar": {
+            "get": {
+                "tags": [
+                    "ProjetosTipos"
+                ],
+                "summary": "Obter detalhes de todos os tipos de projeto",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "Id": "1",
+                                        "Descricao": "teste qa",
+                                        "Ativo": 1,
+                                        "Excluido": "0",
+                                        "IdUsuarioInclusao": "1",
+                                        "DataInclusao": "2024-03-04 10:54:31",
+                                        "IdUsuarioAlteracao": null,
+                                        "DataAlteracao": null
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ProjetosTipos/consultar/{id}": {
+            "get": {
+                "tags": [
+                    "ProjetosTipos"
+                ],
+                "summary": "Obter detalhes de um tipo de projeto",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "Descricao": "TESTE QA",
+                                    "Ativo": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ProjetosTipos/excluir/{id}": {
+            "delete": {
+                "tags": [
+                    "ProjetosTipos"
+                ],
+                "summary": "Excluir um tipo de projeto existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/TelefonesTipos/adicionar": {
+            "post": {
+                "tags": [
+                    "TelefonesTipos"
+                ],
+                "summary": "Adicionar um novo tipo de telefone",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Descricao": {
+                                        "type": "string"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Descricao",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "Nome": "teste qa",
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tipo de telefone adicionado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Descricao": "teste qa",
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/TelefonesTipos/editar/{id}": {
+            "put": {
+                "tags": [
+                    "TelefonesTipos"
+                ],
+                "summary": "Atualizar um tipo de telefone existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Descricao": {
+                                        "type": "string"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Nome",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "Descricao": "teste qa",
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tipo de telefone atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Descricao": "teste qa",
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/TelefonesTipos/consultar": {
+            "get": {
+                "tags": [
+                    "TelefonesTipos"
+                ],
+                "summary": "Obter detalhes de todos os tipos de telefone",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "Id": "1",
+                                        "Descricao": "teste qa",
+                                        "Ativo": 1,
+                                        "Excluido": "0",
+                                        "IdUsuarioInclusao": "1",
+                                        "DataInclusao": "2024-03-04 10:54:31",
+                                        "IdUsuarioAlteracao": null,
+                                        "DataAlteracao": null
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/TelefonesTipos/consultar/{id}": {
+            "get": {
+                "tags": [
+                    "TelefonesTipos"
+                ],
+                "summary": "Obter detalhes de um tipo de telefone",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "Descricao": "TESTE QA",
+                                    "Ativo": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/TelefonesTipos/excluir/{id}": {
+            "delete": {
+                "tags": [
+                    "TelefonesTipos"
+                ],
+                "summary": "Excluir um tipo de telefone existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Atividades/adicionar": {
+            "post": {
+                "tags": [
+                    "Atividades"
+                ],
+                "summary": "Adicionar uma nova atividade",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Nome": {
+                                        "type": "string"
+                                    },
+                                    "DataInicio": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "DataFim": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "QuantidadeMaximaHoras": {
+                                        "type": "integer"
+                                    },
+                                    "IdProjeto": {
+                                        "type": "integer"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Nome",
+                                    "QuantidadeMaximaHoras",
+                                    "DataInicio",
+                                    "DataFim",
+                                    "IdProjeto",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "Nome": "teste qa",
+                                "Descricao": "teste qa",
+                                "QuantidadeMaximaHoras": 1,
+                                "DataInicio": "2024-03-04",
+                                "DataFim": "2024-03-04",
+                                "IdProjeto": 1,
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Atividade adicionado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Nome": "teste qa",
+                                    "Descricao": "teste qa",
+                                    "QuantidadeMaximaHoras": 1,
+                                    "DataInicio": "2024-03-04",
+                                    "DataFim": "2024-03-04",
+                                    "IdProjeto": 1,
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Atividades/editar/{id}": {
+            "put": {
+                "tags": [
+                    "Atividades"
+                ],
+                "summary": "Atualizar uma atividade existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Nome": {
+                                        "type": "string"
+                                    },
+                                    "DataInicio": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "DataFim": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "QuantidadeMaximaHoras": {
+                                        "type": "integer"
+                                    },
+                                    "IdProjeto": {
+                                        "type": "integer"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Nome",
+                                    "QuantidadeMaximaHoras",
+                                    "DataInicio",
+                                    "DataFim",
+                                    "IdProjeto",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "Nome": "teste qa",
+                                "Descricao": "teste qa",
+                                "QuantidadeMaximaHoras": 1,
+                                "DataInicio": "2024-03-04",
+                                "DataFim": "2024-03-04",
+                                "IdProjeto": 1,
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Atividade atualizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Nome": "teste qa",
+                                    "Descricao": "teste qa",
+                                    "QuantidadeMaximaHoras": 1,
+                                    "DataInicio": "2024-03-04",
+                                    "DataFim": "2024-03-04",
+                                    "IdProjeto": 1,
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Atividades/consultar": {
+            "get": {
+                "tags": [
+                    "Atividades"
+                ],
+                "summary": "Obter detalhes de todos as atividades cadastrada",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "Nome": "teste qa",
+                                    "Descricao": "teste qa",
+                                    "QuantidadeMaximaHoras": 1,
+                                    "DataInicio": "2024-03-04",
+                                    "DataFim": "2024-03-04",
+                                    "IdProjeto": 1,
+                                    "Ativo": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Atividades/consultar/{id}": {
+            "get": {
+                "tags": [
+                    "Atividades"
+                ],
+                "summary": "Obter detalhes de uma atividade específica",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "Nome": "teste qa",
+                                    "Descricao": "teste qa",
+                                    "QuantidadeMaximaHoras": 1,
+                                    "DataInicio": "2024-03-04",
+                                    "DataFim": "2024-03-04",
+                                    "IdProjeto": 1,
+                                    "Ativo": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Atividades/excluir/{id}": {
+            "delete": {
+                "tags": [
+                    "Atividades"
+                ],
+                "summary": "Excluir uma atividade existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Clientes/adicionar": {
+            "post": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Adicionar uma novo cliente",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "RazaoSocial": {
+                                        "type": "string"
+                                    },
+                                    "NomeFantasia": {
+                                        "type": "string"
+                                    },
+                                    "Cnpj": {
+                                        "type": "string"
+                                    },
+                                    "InscricaoEstadual": {
+                                        "type": "string"
+                                    },
+                                    "Site": {
+                                        "type": "string"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "RazaoSocial",
+                                    "NomeFantasia",
+                                    "Cnpj",
+                                    "InscricaoEstadual",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "RazaoSocial": "teste qa",
+                                "NomeFantasia": "teste qa",
+                                "Cnpj": "76.329.016/0001-04",
+                                "InscricaoEstadual": "102300200",
+                                "Site": "www.google.com.br",
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cliente adicionado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "RazaoSocial": "teste qa",
+                                    "NomeFantasia": "teste qa",
+                                    "Cnpj": "76.329.016/0001-04",
+                                    "InscricaoEstadual": "102300200",
+                                    "Site": "www.google.com.br",
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Clientes/editar/{id}": {
+            "put": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Atualizar um cliente existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "RazaoSocial": {
+                                        "type": "string"
+                                    },
+                                    "NomeFantasia": {
+                                        "type": "string"
+                                    },
+                                    "Cnpj": {
+                                        "type": "string"
+                                    },
+                                    "InscricaoEstadual": {
+                                        "type": "string"
+                                    },
+                                    "Site": {
+                                        "type": "string"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "RazaoSocial",
+                                    "NomeFantasia",
+                                    "Cnpj",
+                                    "InscricaoEstadual",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "RazaoSocial": "teste qa",
+                                "NomeFantasia": "teste qa",
+                                "Cnpj": "76.329.016/0001-04",
+                                "InscricaoEstadual": "102300200",
+                                "Site": "www.google.com.br",
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "RazaoSocial": "teste qa",
+                                    "NomeFantasia": "teste qa",
+                                    "Cnpj": "76.329.016/0001-04",
+                                    "InscricaoEstadual": "102300200",
+                                    "Site": "www.google.com.br",
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Clientes/consultar": {
+            "get": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Obter detalhes de todos os clientes cadastrado",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "RazaoSocial": "teste qa",
+                                    "NomeFantasia": "teste qa",
+                                    "Cnpj": "76.329.016/0001-04",
+                                    "InscricaoEstadual": "102300200",
+                                    "Site": "www.google.com.br",
+                                    "Ativo": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Clientes/consultar/{id}": {
+            "get": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Obter detalhes de um cliente específico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "RazaoSocial": "teste qa",
+                                    "NomeFantasia": "teste qa",
+                                    "Cnpj": "76.329.016/0001-04",
+                                    "InscricaoEstadual": "102300200",
+                                    "Site": "www.google.com.br",
+                                    "Ativo": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Clientes/excluir/{id}": {
+            "delete": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Excluir um cliente existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Prestadores/adicionar": {
+            "post": {
+                "tags": [
+                    "Prestadores"
+                ],
+                "summary": "Adicionar uma novo prestador",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "RazaoSocial": {
+                                        "type": "string"
+                                    },
+                                    "NomeFantasia": {
+                                        "type": "string"
+                                    },
+                                    "Cnpj": {
+                                        "type": "string"
+                                    },
+                                    "InscricaoEstadual": {
+                                        "type": "string"
+                                    },
+                                    "Banco": {
+                                        "type": "string"
+                                    },
+                                    "Agencia": {
+                                        "type": "string"
+                                    },
+                                    "Conta": {
+                                        "type": "string"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "RazaoSocial",
+                                    "NomeFantasia",
+                                    "Cnpj",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "RazaoSocial": "teste qa",
+                                "NomeFantasia": "teste qa",
+                                "Cnpj": "76.329.016/0001-04",
+                                "InscricaoEstadual": "102300200",
+                                "Banco": "Santander",
+                                "Agencia": "1020",
+                                "Conta": "1020",
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Prestador adicionado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "RazaoSocial": "teste qa",
+                                    "NomeFantasia": "teste qa",
+                                    "Cnpj": "76.329.016/0001-04",
+                                    "InscricaoEstadual": "102300200",
+                                    "Banco": "Santander",
+                                    "Agencia": "1020",
+                                    "Conta": "1020",
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Prestadores/editar/{id}": {
+            "put": {
+                "tags": [
+                    "Prestadores"
+                ],
+                "summary": "Atualizar um prestador existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "RazaoSocial": {
+                                        "type": "string"
+                                    },
+                                    "NomeFantasia": {
+                                        "type": "string"
+                                    },
+                                    "Cnpj": {
+                                        "type": "string"
+                                    },
+                                    "InscricaoEstadual": {
+                                        "type": "string"
+                                    },
+                                    "Banco": {
+                                        "type": "string"
+                                    },
+                                    "Agencia": {
+                                        "type": "string"
+                                    },
+                                    "Conta": {
+                                        "type": "string"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "RazaoSocial",
+                                    "NomeFantasia",
+                                    "Cnpj",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "RazaoSocial": "teste qa",
+                                "NomeFantasia": "teste qa",
+                                "Cnpj": "76.329.016/0001-04",
+                                "InscricaoEstadual": "102300200",
+                                "Banco": "Santander",
+                                "Agencia": "1020",
+                                "Conta": "1020",
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Prestador atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "RazaoSocial": "teste qa",
+                                    "NomeFantasia": "teste qa",
+                                    "Cnpj": "76.329.016/0001-04",
+                                    "InscricaoEstadual": "102300200",
+                                    "Banco": "Santander",
+                                    "Agencia": "1020",
+                                    "Conta": "1020",
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Prestadores/consultar": {
+            "get": {
+                "tags": [
+                    "Prestadores"
+                ],
+                "summary": "Obter detalhes de todos os prestadores cadastrado",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "RazaoSocial": "teste qa",
+                                    "NomeFantasia": "teste qa",
+                                    "Cnpj": "76.329.016/0001-04",
+                                    "InscricaoEstadual": "102300200",
+                                    "Banco": "Santander",
+                                    "Agencia": "1020",
+                                    "Conta": "1020",
+                                    "Ativo": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Prestadores/consultar/{id}": {
+            "get": {
+                "tags": [
+                    "Prestadores"
+                ],
+                "summary": "Obter detalhes de um prestador específico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "RazaoSocial": "teste qa",
+                                    "NomeFantasia": "teste qa",
+                                    "Cnpj": "76.329.016/0001-04",
+                                    "InscricaoEstadual": "102300200",
+                                    "Banco": "Santander",
+                                    "Agencia": "1020",
+                                    "Conta": "1020",
+                                    "Ativo": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Prestadores/excluir/{id}": {
+            "delete": {
+                "tags": [
+                    "Prestadores"
+                ],
+                "summary": "Excluir um prestador existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ColaboradoresCliente/adicionar": {
+            "post": {
+                "tags": [
+                    "ColaboradoresCliente"
+                ],
+                "summary": "Vincular um novo colaborador ao cliente",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "IdColaborador": {
+                                        "type": "integer"
+                                    },
+                                    "IdCliente": {
+                                        "type": "integer"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "IdColaborador",
+                                    "IdCliente",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "IdColaborador": 1,
+                                "IdCliente": 2,
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Colaborador vinculado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "IdColaborador": 1,
+                                    "IdCliente": 2,
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ColaboradoresCliente/editar/{id}": {
+            "put": {
+                "tags": [
+                    "ColaboradoresCliente"
+                ],
+                "summary": "Atualizar um vinculo existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "IdColaborador": {
+                                        "type": "integer"
+                                    },
+                                    "IdCliente": {
+                                        "type": "integer"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "IdColaborador",
+                                    "IdCliente",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "IdColaborador": 1,
+                                "IdCliente": 2,
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Vinculo atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "IdColaborador": 1,
+                                    "IdCliente": 2,
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ColaboradoresCliente/consultar": {
+            "get": {
+                "tags": [
+                    "ColaboradoresCliente"
+                ],
+                "summary": "Obter detalhes de todos os vinculo cadastrado",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "IdColaborador": 1,
+                                    "IdCliente": 2,
+                                    "Ativo": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ColaboradoresCliente/consultar/{id}": {
+            "get": {
+                "tags": [
+                    "ColaboradoresCliente"
+                ],
+                "summary": "Obter detalhes de um vinculo específico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "IdColaborador": 1,
+                                    "IdCliente": 2,
+                                    "Ativo": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ColaboradoresCliente/excluir/{id}": {
+            "delete": {
+                "tags": [
+                    "ColaboradoresCliente"
+                ],
+                "summary": "Excluir um vinculo existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/DepartamentoResponsavel/adicionar": {
+            "post": {
+                "tags": [
+                    "DepartamentoResponsavel"
+                ],
+                "summary": "Vincular um novo departamento ao responsável",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "IdDepartamento": {
+                                        "type": "integer"
+                                    },
+                                    "IdResponsavel": {
+                                        "type": "integer"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "IdDepartamento",
+                                    "IdCliente",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "IdDepartamento": 1,
+                                "IdResponsavel": 2,
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Departamento vinculado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "IdDepartamento": 1,
+                                    "IdResponsavel": 2,
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/DepartamentoResponsavel/editar/{id}": {
+            "put": {
+                "tags": [
+                    "DepartamentoResponsavel"
+                ],
+                "summary": "Atualizar um vinculo existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "IdDepartamento": {
+                                        "type": "integer"
+                                    },
+                                    "IdResponsavel": {
+                                        "type": "integer"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "IdDepartamento",
+                                    "IdResponsavel",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "IdDepartamento": 1,
+                                "IdResponsavel": 2,
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Vinculo atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "IdColaborador": 1,
+                                    "IdCliente": 2,
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/DepartamentoResponsavel/consultar": {
+            "get": {
+                "tags": [
+                    "DepartamentoResponsavel"
+                ],
+                "summary": "Obter detalhes de todos os vinculo cadastrado",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "IdDepartamento": 1,
+                                    "IdResponsavel": 2,
+                                    "Ativo": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/DepartamentoResponsavel/consultar/{id}": {
+            "get": {
+                "tags": [
+                    "DepartamentoResponsavel"
+                ],
+                "summary": "Obter detalhes de um vinculo específico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "IdDepartamento": 1,
+                                    "IdResponsavel": 2,
+                                    "Ativo": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/DepartamentoResponsavel/excluir/{id}": {
+            "delete": {
+                "tags": [
+                    "DepartamentoResponsavel"
+                ],
+                "summary": "Excluir um vinculo existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Projetos/adicionar": {
+            "post": {
+                "tags": [
+                    "Projetos"
+                ],
+                "summary": "Adicionar uma novo projeto",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Nome": {
+                                        "type": "string"
+                                    },
+                                    "DataInicio": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "DataFim": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "IdTipoProjeto": {
+                                        "type": "integer"
+                                    },
+                                    "IdColaboradorLider": {
+                                        "type": "integer"
+                                    },
+                                    "IdCliente": {
+                                        "type": "integer"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Nome",
+                                    "IdColaboradorLider",
+                                    "IdTipoProjeto",
+                                    "IdCliente",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "Nome": "teste qa",
+                                "DataInicio": "2024-03-04",
+                                "DataFim": "2024-03-04",
+                                "IdColaboradorLider": 1,
+                                "IdTipoProjeto": 1,
+                                "IdCliente": 1,
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Projeto adicionado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Nome": "teste qa",
+                                    "DataInicio": "2024-03-04",
+                                    "DataFim": "2024-03-04",
+                                    "IdColaboradorLider": 1,
+                                    "IdTipoProjeto": 1,
+                                    "IdCliente": 1,
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Projetos/editar/{id}": {
+            "put": {
+                "tags": [
+                    "Projetos"
+                ],
+                "summary": "Atualizar um projeto existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "Nome": {
+                                        "type": "string"
+                                    },
+                                    "DataInicio": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "DataFim": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "IdTipoProjeto": {
+                                        "type": "integer"
+                                    },
+                                    "IdColaboradorLider": {
+                                        "type": "integer"
+                                    },
+                                    "IdCliente": {
+                                        "type": "integer"
+                                    },
+                                    "Ativo": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "Nome",
+                                    "IdColaboradorLider",
+                                    "IdTipoProjeto",
+                                    "IdCliente",
+                                    "Ativo"
+                                ]
+                            },
+                            "example": {
+                                "Nome": "teste qa",
+                                "DataInicio": "2024-03-04",
+                                "DataFim": "2024-03-04",
+                                "IdColaboradorLider": 1,
+                                "IdTipoProjeto": 1,
+                                "IdCliente": 1,
+                                "Ativo": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Projeto atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Nome": "teste qa",
+                                    "DataInicio": "2024-03-04",
+                                    "DataFim": "2024-03-04",
+                                    "IdColaboradorLider": 1,
+                                    "IdTipoProjeto": 1,
+                                    "IdCliente": 1,
+                                    "Ativo": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Projetos/consultar": {
+            "get": {
+                "tags": [
+                    "Projetos"
+                ],
+                "summary": "Obter detalhes de todos os projetos cadastrado",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "Nome": "teste qa",
+                                    "DataInicio": "2024-03-04",
+                                    "DataFim": "2024-03-04",
+                                    "IdColaboradorLider": 1,
+                                    "IdTipoProjeto": 1,
+                                    "IdCliente": 1,
+                                    "Ativo": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Projetos/consultar/{id}": {
+            "get": {
+                "tags": [
+                    "Projetos"
+                ],
+                "summary": "Obter detalhes de uma projeto específico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "Id": "1",
+                                    "Nome": "teste qa",
+                                    "DataInicio": "2024-03-04",
+                                    "DataFim": "2024-03-04",
+                                    "IdColaboradorLider": 1,
+                                    "IdTipoProjeto": 1,
+                                    "IdCliente": 1,
+                                    "Ativo": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Projetos/excluir/{id}": {
+            "delete": {
+                "tags": [
+                    "Projetos"
+                ],
+                "summary": "Excluir um projeto existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ColaboradoresPrestadores/adicionar": {
+            "post": {
+                "tags": [
+                    "ColaboradoresPrestadores"
+                ],
+                "summary": "Adicionar uma novo colaborador",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "confirmar_senha": {
+                                        "type": "string"
+                                    },
+                                    "perfil_usuario": {
+                                        "type": "integer"
+                                    },
+                                    "id_prestador": {
+                                        "type": "integer"
+                                    },
+                                    "IdCliente": {
+                                        "type": "integer"
+                                    },
+                                    "active": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "username",
+                                    "password",
+                                    "confirmar_senha",
+                                    "perfil_usuario",
+                                    "id_prestador",
+                                    "active"
+                                ]
+                            },
+                            "example": {
+                                "first_name": "teste",
+                                "last_name": "QA",
+                                "email": "teste@qarti.com.br",
+                                "username": "teste1",
+                                "password": "12345",
+                                "confirmar_senha": "12345",
+                                "perfil_usuario": 1,
+                                "id_prestador": 1,
+                                "active": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Colaborador adicionado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "first_name": "teste",
+                                    "last_name": "QA",
+                                    "email": "teste@qarti.com.br",
+                                    "username": "teste1",
+                                    "password": "12345",
+                                    "confirmar_senha": "12345",
+                                    "perfil_usuario": 1,
+                                    "id_prestador": 1,
+                                    "active": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ColaboradoresPrestadores/editar/{id}": {
+            "put": {
+                "tags": [
+                    "ColaboradoresPrestadores"
+                ],
+                "summary": "Atualizar um colaborador existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "confirmar_senha": {
+                                        "type": "string"
+                                    },
+                                    "perfil_usuario": {
+                                        "type": "integer"
+                                    },
+                                    "id_prestador": {
+                                        "type": "integer"
+                                    },
+                                    "IdCliente": {
+                                        "type": "integer"
+                                    },
+                                    "active": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "username",
+                                    "password",
+                                    "confirmar_senha",
+                                    "perfil_usuario",
+                                    "id_prestador",
+                                    "active"
+                                ]
+                            },
+                            "example": {
+                                "first_name": "teste",
+                                "last_name": "QA",
+                                "email": "teste@qarti.com.br",
+                                "username": "teste1",
+                                "password": "12345",
+                                "confirmar_senha": "12345",
+                                "perfil_usuario": 1,
+                                "id_prestador": 1,
+                                "active": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Colaborador atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "first_name": "teste",
+                                    "last_name": "QA",
+                                    "email": "teste@qarti.com.br",
+                                    "username": "teste1",
+                                    "password": "12345",
+                                    "confirmar_senha": "12345",
+                                    "perfil_usuario": 1,
+                                    "id_prestador": 1,
+                                    "active": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ColaboradoresPrestadores/consultar": {
+            "get": {
+                "tags": [
+                    "ColaboradoresPrestadores"
+                ],
+                "summary": "Obter detalhes de todos os colaboradores cadastrado",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": "1",
+                                    "first_name": "teste",
+                                    "last_name": "QA",
+                                    "email": "teste@qarti.com.br",
+                                    "username": "teste1",
+                                    "password": "12345",
+                                    "confirmar_senha": "12345",
+                                    "perfil_usuario": 1,
+                                    "id_prestador": 1,
+                                    "active": 1,
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ColaboradoresPrestadores/consultar/{id}": {
+            "get": {
+                "tags": [
+                    "ColaboradoresPrestadores"
+                ],
+                "summary": "Obter detalhes de um colaborador específico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": "1",
+                                    "first_name": "teste",
+                                    "last_name": "QA",
+                                    "email": "teste@qarti.com.br",
+                                    "username": "teste1",
+                                    "password": "12345",
+                                    "confirmar_senha": "12345",
+                                    "perfil_usuario": 1,
+                                    "id_prestador": 1,
+                                    "active": 1,
+                                    "Excluido": "0",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Groups/adicionar": {
+            "post": {
+                "tags": [
+                    "Groups"
+                ],
+                "summary": "Adicionar um novo perfil",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "description"
+                                ]
+                            },
+                            "example": {
+                                "name": "teste qa",
+                                "description": "teste"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Perfil adicionado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "name": "teste qa",
+                                    "description": "teste"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Groups/editar/{id}": {
+            "put": {
+                "tags": [
+                    "Groups"
+                ],
+                "summary": "Atualizar um perfil existente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "description"
+                                ]
+                            },
+                            "example": {
+                                "name": "teste qa",
+                                "description": "teste"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Perfil atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "name": "teste qa",
+                                    "description": "teste"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Groups/consultar": {
+            "get": {
+                "tags": [
+                    "Groups"
+                ],
+                "summary": "Obter detalhes de todos os perfil",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "id": "1",
+                                        "name": "teste qa",
+                                        "description": "teste",
+                                        "IdUsuarioInclusao": "1",
+                                        "DataInclusao": "2024-03-04 10:54:31",
+                                        "IdUsuarioAlteracao": null,
+                                        "DataAlteracao": null
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Groups/consultar/{id}": {
+            "get": {
+                "tags": [
+                    "Groups"
+                ],
+                "summary": "Obter detalhes de um perfil especifico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": "1",
+                                    "name": "teste qa",
+                                    "description": "teste",
+                                    "IdUsuarioInclusao": "1",
+                                    "DataInclusao": "2024-03-04 10:54:31",
+                                    "IdUsuarioAlteracao": null,
+                                    "DataAlteracao": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login inválido",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "token": null,
+                                    "status": false,
+                                    "response": "Login Failed!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
