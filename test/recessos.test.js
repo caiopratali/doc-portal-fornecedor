@@ -35,6 +35,13 @@ describe("recess (e2e)", () => {
         expect(allRecess).to.be.an('array');
 
         addContext(this, {
+            title: 'input',
+            value: {
+                data
+            }
+        });
+
+        addContext(this, {
             title: 'output',
             value: {
                 statusCode: status,
@@ -62,6 +69,13 @@ describe("recess (e2e)", () => {
         expect(response.body.Id).to.be.equal(lastRecess.Id);
 
         addContext(this, {
+            title: 'input',
+            value: {
+                id: lastRecess.Id
+            }
+        });
+
+        addContext(this, {
             title: 'output',
             value: {
                 statusCode: response.status,
@@ -73,9 +87,17 @@ describe("recess (e2e)", () => {
     });
 
     it("should not be able to get a recess by id that does not exist", async function () {
-        const response = await getRecessById(request, token, new Date().getTime());
+        const id = new Date().getTime();
+        const response = await getRecessById(request, token, id);
 
         expect(response.status).to.be.equal(404);
+
+        addContext(this, {
+            title: 'input',
+            value: {
+                id
+            }
+        });
 
         addContext(this, {
             title: 'output',
@@ -90,6 +112,13 @@ describe("recess (e2e)", () => {
 
         expect(response.status).to.be.equal(201);
         expect(response.body).to.be.an('object').to.have.property('Descricao');
+
+        addContext(this, {
+            title: 'input',
+            value: {
+                data
+            }
+        });
 
         addContext(this, {
             title: 'output',
@@ -113,6 +142,13 @@ describe("recess (e2e)", () => {
 
         expect(response.status).to.be.equal(400);
         expect(response.body).to.be.an('object').to.have.property('erros');
+
+        addContext(this, {
+            title: 'input',
+            value: {
+                data
+            }
+        });
 
         addContext(this, {
             title: 'output',
@@ -148,10 +184,17 @@ describe("recess (e2e)", () => {
         expect(updatedRecess.body.Descricao).to.be.equal(newData.Descricao);
 
         addContext(this, {
+            title: 'input',
+            value: {
+                newData
+            }
+        });
+
+        addContext(this, {
             title: 'output',
             value: {
                 statusCode: response.status,
-                body: response.body
+                body: updatedRecess.body
             }
         });
 
@@ -172,6 +215,13 @@ describe("recess (e2e)", () => {
         expect(response.status).to.be.equal(400);
 
         addContext(this, {
+            title: 'input',
+            value: {
+                data: lastRecess
+            }
+        });
+
+        addContext(this, {
             title: 'output',
             value: {
                 statusCode: response.status,
@@ -182,11 +232,19 @@ describe("recess (e2e)", () => {
     });
 
     it("should not be able to update recess that does not exist", async function () {
-        const data = { ...mocks.recess, Id: new Date().getTime() };
+        const id = new Date().getTime();
+        const data = { ...mocks.recess, Id: id };
 
         const response = await updateRecess(request, token, data);
 
         expect(response.status).to.be.equal(404);
+
+        addContext(this, {
+            title: 'input',
+            value: {
+                data
+            }
+        });
 
         addContext(this, {
             title: 'output',
@@ -213,6 +271,13 @@ describe("recess (e2e)", () => {
         expect(deletedRecess.status).to.be.equal(404);
 
         addContext(this, {
+            title: 'input',
+            value: {
+                data: lastRecess
+            }
+        });
+
+        addContext(this, {
             title: 'output',
             value: {
                 statusCode: response.status,
@@ -221,9 +286,18 @@ describe("recess (e2e)", () => {
     });
 
     it("should not be able to delete recess that does not exist", async function () {
-        const response = await deleteRecess(request, token, new Date().getTime());
+        const id = new Date().getTime();
+
+        const response = await deleteRecess(request, token, id);
 
         expect(response.status).to.be.equal(404);
+
+        addContext(this, {
+            title: 'input',
+            value: {
+                id
+            }
+        });
 
         addContext(this, {
             title: 'output',
