@@ -6,7 +6,6 @@ const { env } = require('../support/config/env');
 const { request } = require('../support/config/request');
 const { loginService } = require('../support/service/login');
 const { listRecess, createRecess, updateRecess, getRecessById, deleteRecess } = require("../support/service/recessos");
-const { de } = require("date-fns/locale");
 
 let token;
 
@@ -22,11 +21,20 @@ describe("recess (e2e)", () => {
         token = response.body.token;
     });
 
-    it("should be able to get the recess list", async () => {
-        const response = await listRecess(request, token);
 
-        expect(response.status).to.be.equal(200);
-        expect(response.body).to.be.an('array');
+    it("should be able to get the recess list", async () => {
+        const data = mocks.recess;
+
+        await createRecess(request, token, data);
+
+        const { status, body: allRecess } = await listRecess(request, token);
+
+        expect(status).to.be.equal(200);
+        expect(allRecess).to.be.an('array');
+
+        const lastRecess = allRecess[allRecess.length - 1];
+
+        await deleteRecess(request, token, lastRecess.Id);
     });
 
     it("should be able to get a recess by id", async () => {
@@ -42,6 +50,8 @@ describe("recess (e2e)", () => {
 
         expect(response.status).to.be.equal(200);
         expect(response.body.Id).to.be.equal(lastRecess.Id);
+
+        await deleteRecess(request, token, lastRecess.Id);
     });
 
     it("should not be able to get a recess by id that does not exist", async () => {
@@ -57,6 +67,12 @@ describe("recess (e2e)", () => {
 
         expect(response.status).to.be.equal(201);
         expect(response.body).to.be.an('object').to.have.property('Descricao');
+
+        const { body: allRecess } = await listRecess(request, token);
+
+        const lastRecess = allRecess[allRecess.length - 1];
+
+        await deleteRecess(request, token, lastRecess.Id);
     });
 
     it("should not be able when not filling in mandatory data", async () => {
@@ -107,6 +123,8 @@ describe("recess (e2e)", () => {
         const response = await updateRecess(request, token, lastRecess);
 
         expect(response.status).to.be.equal(400);
+
+        await deleteRecess(request, token, lastRecess.Id);
     });
 
     it("should not be able to update recess that does not exist", async () => {
